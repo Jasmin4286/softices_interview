@@ -1,7 +1,24 @@
-import moment from "moment/moment";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
+  const [quotes, setQuotes] = useState({});
+  useEffect(() => {
+    getQuotesData();
+  }, []);
+
+  const getQuotesData = async () => {
+    const headers = { "Content-Type": "application/json" };
+    const { status, data } = await axios.get(
+      "https://dummyjson.com/quotes/random",
+      {
+        headers: headers,
+      }
+    );
+    if (status == 200) {
+      setQuotes(data);
+    }
+  };
   const myDate = new Date().toTimeString();
   const getHours = myDate.split(":")[0];
 
@@ -20,6 +37,10 @@ const Dashboard = () => {
     <>
       <h1>Dashboard</h1>
       {`${morningMsg()} Jasmin Vaghasiya`}
+
+      <h3>Quotes</h3>
+      <p>{`Quote: ${quotes.quote}`}</p>
+      <p>{`Author: ${quotes.author}`}</p>
     </>
   );
 };
