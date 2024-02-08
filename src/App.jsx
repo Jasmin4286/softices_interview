@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import UserListing from "./pages/UserListing";
-// import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import SingleUser from "./pages/SingleUser";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/users" element={<UserListing />} />
           <Route path="/users/:id" element={<SingleUser />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>

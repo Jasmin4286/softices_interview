@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 
 const SingleUser = () => {
@@ -25,34 +25,36 @@ const SingleUser = () => {
   const { firstName, lastName, image, email, birthDate, gender } = singleUsers;
   return (
     <>
-      <Table responsive>
-        <thead>
-          <tr>
-            <th>firstname</th>
-            <th>lastname</th>
-            <th>image</th>
-            <th>email</th>
-            <th>birthDate</th>
-            <th>gender</th>
-            <th>action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{firstName}</td>
-            <td>{lastName}</td>
-            <img src={image} alt="image" width="50" />
-            <td>{email}</td>
-            <td>{birthDate}</td>
-            <td>{gender}</td>
-            <Link to="/users">
-              <td>
-                <Button variant="primary">Back</Button>
-              </td>
-            </Link>
-          </tr>
-        </tbody>
-      </Table>
+    {
+      localStorage.getItem('token') ? <Table responsive>
+      <thead>
+        <tr>
+          <th>firstname</th>
+          <th>lastname</th>
+          <th>image</th>
+          <th>email</th>
+          <th>birthDate</th>
+          <th>gender</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{firstName}</td>
+          <td>{lastName}</td>
+          <img src={image} alt="image" width="50" />
+          <td>{email}</td>
+          <td>{birthDate}</td>
+          <td>{gender}</td>
+          <Link to="/users">
+            <td>
+              <Button variant="primary">Back</Button>
+            </td>
+          </Link>
+        </tr>
+      </tbody>
+    </Table> : <Navigate to='/login'/>
+    }
     </>
   );
 };
