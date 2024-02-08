@@ -10,10 +10,13 @@ const UserListing = () => {
   }, []);
 
   const getUsersData = async () => {
-    const res = await axios.get("https://dummyjson.com/users");
-    if (res.status == 200) {
-      setUsersData(res.data.users);
-      localStorage.setItem("users", JSON.stringify(res.data.users));
+    const {
+      status,
+      data: { users },
+    } = await axios.get("https://dummyjson.com/users");
+    if (status === 200) {
+      setUsersData(users);
+      localStorage.setItem("users", JSON.stringify(users));
     }
   };
 

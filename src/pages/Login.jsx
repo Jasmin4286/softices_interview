@@ -11,12 +11,15 @@ const Login = () => {
   const handleSubmit = async () => {
     const headers = { "Content-Type": "application/json" };
     const {
+      status,
       data: { token },
     } = await axios.post("https://dummyjson.com/auth/login", userData, {
       headers,
     });
 
-    localStorage.setItem("token", token);
+    if (status === 200) {
+      localStorage.setItem("token", token);
+    }
   };
   return (
     <>
